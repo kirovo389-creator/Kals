@@ -37,6 +37,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B astra-unpacked
-          git add -A
+          git add -A -- . ':!.github'
           git commit -m "Extract Astra source for modernization" || echo "No source changes"
           git push origin HEAD:refs/heads/astra-unpacked --force
