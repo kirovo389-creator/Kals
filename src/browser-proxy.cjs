@@ -49,7 +49,7 @@ if (require.main === module) {
   });
   const port = Number(process.env.ASTRA_BROWSER_MCP_PROXY_PORT || 8931);
   server.listen(port, '0.0.0.0', () => {
-    process.stdout.write(`Astra browser MCP gateway listening on ${port}\\n`);
+    process.stdout.write(`Astra browser MCP gateway listening on ${port}\n`);
   });
 }
 
