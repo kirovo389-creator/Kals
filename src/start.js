@@ -4,6 +4,18 @@ const status = document.getElementById('status');
 const detail = document.getElementById('detail');
 const errorBox = document.getElementById('error');
 const startButton = document.getElementById('start');
+const rootsList = document.getElementById('roots-list');
+
+async function refreshRoots() {
+  try {
+    const roots = await window.astra.listWorkspaceRoots();
+    rootsList.textContent = roots.length ? roots.join('\\n') : 'Пока подключены только папки проектов Astra.';
+  } catch (error) {
+    rootsList.textContent = error?.message || String(error);
+  }
+}
+
+refreshRoots();
 
 window.astra.onStatus(({ message, kind }) => {
   status.textContent = message;
@@ -29,4 +41,18 @@ startButton.addEventListener('click', async () => {
 
 document.getElementById('projects').addEventListener('click', () => {
   window.astra.openProjectFolder();
+});
+
+
+document.getElementById('add-folder').addEventListener('click', async () => {
+  try {
+    const result = await window.astra.addWorkspaceRoot();
+    if (result.cancelled) return;
+    await refreshRoots();
+    status.textContent = 'Папка добавлена';
+    detail.textContent = 'Новая папка будет доступна агенту после следующего запуска песочницы.';
+  } catch (error) {
+    errorBox.textContent = error?.message || String(error);
+    errorBox.hidden = false;
+  }
 });
