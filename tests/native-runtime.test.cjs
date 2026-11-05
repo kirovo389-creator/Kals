@@ -34,18 +34,18 @@ test('runtime root is resolved to resources in both installed and development bu
 test('native runtime environment places bundled tools first and preserves inherited variables', () => {
   const result = buildNativeRuntimeEnv({
     baseEnv: { PATH: 'system-path', KEEP_ME: 'yes' },
-    homeDir: 'C:/Users/test',
-    stateDir: 'C:/Users/test/.openhands/agent-canvas',
-    runtimeRoot: 'C:/Program Files/Astra/resources',
+    homeDir: '/home/test',
+    stateDir: '/home/test/.openhands/agent-canvas',
+    runtimeRoot: '/opt/astra/resources',
   });
   const entries = result.PATH.split(path.delimiter);
-  assert.equal(entries[0], path.join('C:/Program Files/Astra/resources', 'bin'));
-  assert.equal(entries[1], path.join('C:/Program Files/Astra/resources', 'node'));
+  assert.equal(entries[0], path.join('/opt/astra/resources', 'bin'));
+  assert.equal(entries[1], path.join('/opt/astra/resources', 'node'));
   assert.equal(entries[2], 'system-path');
-  assert.equal(result.HOME, 'C:/Users/test');
-  assert.equal(result.USERPROFILE, 'C:/Users/test');
+  assert.equal(result.HOME, '/home/test');
+  assert.equal(result.USERPROFILE, '/home/test');
   assert.equal(result.OH_BIND_HOST, '127.0.0.1');
-  assert.equal(result.OH_CANVAS_SAFE_STATE_DIR, 'C:/Users/test/.openhands/agent-canvas');
+  assert.equal(result.OH_CANVAS_SAFE_STATE_DIR, '/home/test/.openhands/agent-canvas');
   assert.equal(result.KEEP_ME, 'yes');
   assert.ok(!result.PATH.includes('host.docker.internal'));
 });
