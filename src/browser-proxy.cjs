@@ -19,16 +19,14 @@ function createProxyServer({ token, upstreamHost = '127.0.0.1', upstreamPort = 8
       return;
     }
 
+    const headers = { ...request.headers, host: `${upstreamHost}:${upstreamPort}` };
+    delete headers.authorization;
     const upstream = http.request({
       hostname: upstreamHost,
       port: upstreamPort,
       method: request.method,
       path: request.url,
-      headers: {
-        ...request.headers,
-        host: `${upstreamHost}:${upstreamPort}`,
-        authorization: undefined,
-      },
+      headers,
     }, upstreamResponse => {
       response.writeHead(upstreamResponse.statusCode || 502, upstreamResponse.headers);
       upstreamResponse.pipe(response);
