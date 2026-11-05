@@ -1,0 +1,60 @@
+{
+  "name": "astra-workstation",
+  "version": "0.2.0",
+  "description": "Personal Windows agent workstation with a persistent browser and configurable workspace roots",
+  "private": true,
+  "license": "MIT",
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "build": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "@playwright/mcp": "0.0.84"
+  },
+  "devDependencies": {
+    "electron": "45.2.2",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "dev.astra.workstation",
+    "productName": "Astra Workstation",
+    "directories": {
+      "output": "dist"
+    },
+    "asarUnpack": [
+      "src/browser-proxy.cjs",
+      "node_modules/@playwright/mcp/**",
+      "node_modules/playwright/**",
+      "node_modules/playwright-core/**"
+    ],
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "assets/starter",
+        "to": "starter"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Astra Workstation",
+      "artifactName": "Astra-Workstation-Setup-${version}.${ext}"
+    }
+  }
+}
