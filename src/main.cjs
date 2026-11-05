@@ -44,8 +44,7 @@ async function waitForPort(port, host = '127.0.0.1', timeoutMs = 90000) {
 }
 
 function getRuntimeScriptPath(relativePath) {
-  if (!app.isPackaged) return path.join(__dirname, relativePath);
-  return path.join(process.resourcesPath, 'app.asar.unpacked', relativePath);
+  return path.join(__dirname, relativePath);
 }
 
 function spawnRuntimeNode(nodeExe, scriptPath, args, env, logPath, options = {}) {
@@ -58,6 +57,7 @@ function spawnRuntimeNode(nodeExe, scriptPath, args, env, logPath, options = {})
     env: { ...process.env, ...env },
   });
   child.once('error', error => {
+    child.spawnError = error;
     try {
       fsSync.appendFileSync(logPath, '\n[astra] Failed to start child process: ' + error.message + '\n');
     } catch {}
@@ -353,6 +353,10 @@ async function waitForCanvas(child, logPath, timeoutMs = 900000) {
   const deadline = Date.now() + timeoutMs;
   let lastError = 'Backend запускается и загружает Python-компоненты';
   while (Date.now() < deadline) {
+    if (child && child.spawnError) {
+      const output = tailLog(logPath);
+      throw new Error('Не удалось запустить Agent Canvas: ' + child.spawnError.message + (output ? '\n\nЖурнал:\n' + output : ''));
+    }
     if (child && child.exitCode !== null) {
       const output = tailLog(logPath);
       throw new Error('Agent Canvas завершился с кодом ' + child.exitCode + '.' + (output ? '\n\nПоследние строки журнала:\n' + output : ''));
