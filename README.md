@@ -13,6 +13,7 @@ A personal Windows agent workstation built around the official OpenHands Agent C
 - Added folders are exposed under projects/roots as Windows directory junctions.
 - Starter Skills for game direction, Godot, Blender, visual QA, gameplay QA, Android export, browser work and native Windows development.
 - Windows x64 NSIS installer designed to upgrade Astra 0.2.0 in place.
+- Native ingress on 18080, Agent Server on 18100 and Automation on 18101; the backend ports avoid the old 0.2.0 Docker ingress on 18000.
 
 ## First launch
 
