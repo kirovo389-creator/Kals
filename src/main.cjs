@@ -62,11 +62,13 @@ function spawnBundledNode(scriptPath, args, env, logPath) {
 async function ensureBrowserMcp(stateDir) {
   const userData = app.getPath('userData');
   const profileDir = path.join(userData, 'browser-profile');
+  const downloadsDir = path.join(app.getPath('documents'), 'Astra Workstation', 'downloads');
   const logsDir = path.join(userData, 'logs');
   const tokenPath = path.join(userData, 'browser-mcp.token');
   const mcpConfigPath = path.join(stateDir, 'mcp.json');
   await Promise.all([
     fs.mkdir(profileDir, { recursive: true }),
+    fs.mkdir(downloadsDir, { recursive: true }),
     fs.mkdir(logsDir, { recursive: true }),
   ]);
 
@@ -92,6 +94,7 @@ async function ensureBrowserMcp(stateDir) {
       '--port', String(BROWSER_MCP_UPSTREAM_PORT),
       '--browser', 'msedge',
       '--user-data-dir', profileDir,
+      '--output-dir', downloadsDir,
       '--shared-browser-context',
       '--caps', 'vision,pdf',
     ], { PLAYWRIGHT_MCP_PING_TIMEOUT_MS: '0' }, path.join(logsDir, 'browser-mcp.log'));
