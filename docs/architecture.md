@@ -22,7 +22,7 @@ Astra is a Windows desktop shell around the official OpenHands Agent Canvas loca
 3. The Agent Canvas state directory is passed through OH_CANVAS_SAFE_STATE_DIR. The API key and secret key persist between restarts.
 4. Astra starts Playwright MCP and the authenticated gateway on loopback, then writes the browser entry to %USERPROFILE%\.openhands\mcp.json.
 5. Astra launches the official Agent Canvas CLI using bundled Node.js, with bundled node/npm/npx and uv added to PATH.
-6. The UI is available at http://127.0.0.1:18080. Agent Server and Automation use their upstream default internal ports.
+6. The UI is available at http://127.0.0.1:18080. Agent Server uses 18100 and Automation uses 18101. These ports deliberately differ from the old 0.2.0 Docker ingress on host port 18000, so the old detached container cannot block the native backend during an in-place upgrade.
 
 The first native launch may download Python packages through uv. Agent Canvas startup has a 15-minute readiness window and its log is written to the Astra app-data logs folder.
 
