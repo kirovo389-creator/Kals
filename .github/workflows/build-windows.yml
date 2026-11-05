@@ -4,7 +4,7 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: astra-windows-build
   cancel-in-progress: true
@@ -26,3 +26,11 @@ jobs:
           path: dist/Astra-Workstation-Setup-*.exe
           if-no-files-found: error
           retention-days: 14
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem "dist/Astra-Workstation-Setup-*.exe" | Select-Object -First 1
+          if (-not $installer) { throw "Windows installer was not found." }
+          gh release create v0.2.0 $installer.FullName --title "Astra Workstation 0.2.0" --notes "Astra Workstation 0.2.0 for Windows x64. Includes the OpenHands-based agent workspace, configurable project folders, and Playwright browser MCP integration."
