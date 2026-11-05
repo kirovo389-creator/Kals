@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:;">
+  <title>Astra Workstation</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="shell">
+    <div class="brand-row">
+      <div class="brand-mark">A</div>
+      <div><div class="brand-name">Astra Workstation</div><div class="brand-sub">LOCAL AI DEVELOPMENT ENVIRONMENT</div></div>
+    </div>
+    <section class="hero">
+      <div class="eyebrow">PERSONAL AGENT WORKSPACE</div>
+      <h1>Твоя рабочая среда<br><span>для разработки и 3D</span></h1>
+      <p class="lead">Чат, терминал, файлы и автономная Docker-среда на твоём компьютере. Для игровых проектов подготовлены навыки Godot, Blender, рендера и тестирования.</p>
+      <div class="status-panel">
+        <div class="status-line"><span class="pulse"></span><span id="status">Готов к запуску</span></div>
+        <div class="status-detail" id="detail">Первый запуск загрузит Docker-образ Agent Canvas. Это может занять время и потребовать несколько гигабайт свободного места.</div>
+      </div>
+      <div class="actions">
+        <button id="start" class="primary">Запустить песочницу <span>→</span></button>
+        <button id="projects" class="secondary">Открыть проекты</button>
+      </div>
+      <div class="error" id="error" hidden></div>
+    </section>
+    <section class="requirements">
+      <div class="req"><span class="req-dot"></span><div><b>Docker Desktop</b><small>Нужен для изоляции</small></div></div>
+      <div class="req"><span class="req-dot"></span><div><b>Подключение к API</b><small>Base URL · API Key · Model ID</small></div></div>
+      <div class="req"><span class="req-dot"></span><div><b>Игровые навыки</b><small>Установлены в стартовый проект</small></div></div>
+    </section>
+    <footer><span>Astra Workstation 0.1.0</span><span>OpenHands Agent Canvas · MIT</span></footer>
+  </main>
+  <script src="./start.js"></script>
+</body>
+</html>
