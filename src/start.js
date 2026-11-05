@@ -9,7 +9,7 @@ const rootsList = document.getElementById('roots-list');
 async function refreshRoots() {
   try {
     const roots = await window.astra.listWorkspaceRoots();
-    rootsList.textContent = roots.length ? roots.join('\\n') : 'Пока подключены только папки проектов Astra.';
+    rootsList.textContent = roots.length ? roots.join('\n') : 'Пока подключены только папки проектов Astra.';
   } catch (error) {
     rootsList.textContent = error?.message || String(error);
   }
