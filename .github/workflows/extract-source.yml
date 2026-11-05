@@ -1,0 +1,42 @@
+name: Extract Astra source for modernization
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/extract-source.yml'
+      - 'astra-source.tar.gz.b64'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: astra-source-extract
+  cancel-in-progress: false
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract source bundle
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, pathlib
+          raw = pathlib.Path("astra-source.tar.gz.b64").read_text().strip()
+          pathlib.Path("/tmp/astra-source.tar.gz").write_bytes(base64.b64decode(raw))
+          PY
+          mkdir -p /tmp/astra-unpack
+          tar -xzf /tmp/astra-source.tar.gz -C /tmp/astra-unpack
+          cp -a /tmp/astra-unpack/. .
+          rm -f astra-source.tar.gz.b64
+      - name: Publish unpacked source branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B astra-unpacked
+          git add -A
+          git commit -m "Extract Astra source for modernization" || echo "No source changes"
+          git push origin HEAD:refs/heads/astra-unpacked --force
