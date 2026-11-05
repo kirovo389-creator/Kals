@@ -65,4 +65,11 @@ jobs:
         run: |
           $installer = Get-ChildItem "dist/Astra-Workstation-Setup-0.3.0.exe" | Select-Object -First 1
           if (-not $installer) { throw "Windows installer was not found." }
-          gh release create v0.3.0 $installer.FullName --target astra-0.3.0-native --title "Astra Workstation 0.3.0" --notes "Native Windows Agent Canvas runtime. No Docker or WSL required. Includes a visible Playwright Edge browser, persistent OpenHands state migration from 0.2.0, bundled and SHA-256-verified Node.js and uv runtimes, and game-development starter skills. This local no-sandbox runtime uses the current Windows account permissions."
+          gh release view v0.3.0 --json tagName *> $null
+          $releaseExists = ($LASTEXITCODE -eq 0)
+          if ($releaseExists) {
+            gh release upload v0.3.0 $installer.FullName --clobber
+          } else {
+            gh release create v0.3.0 $installer.FullName --target astra-0.3.0-native --title "Astra Workstation 0.3.0" --notes "Native Windows Agent Canvas runtime. No Docker or WSL required. Includes a visible Playwright Edge browser, persistent OpenHands state migration from 0.2.0, bundled and SHA-256-verified Node.js and uv runtimes, and game-development starter skills. This local no-sandbox runtime uses the current Windows account permissions."
+          }
+          if ($LASTEXITCODE -ne 0) { throw "GitHub Release publishing failed." }
