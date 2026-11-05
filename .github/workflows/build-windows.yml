@@ -1,0 +1,35 @@
+name: Build Astra Workstation for Windows
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: astra-windows-build
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore source bundle
+        shell: pwsh
+        run: |
+          $encoded = Get-Content -Raw .\astra-source.tar.gz.b64
+          $archive = Join-Path $env:RUNNER_TEMP 'astra-source.tar.gz'
+          [IO.File]::WriteAllBytes($archive, [Convert]::FromBase64String($encoded))
+          tar -xzf $archive -C $env:GITHUB_WORKSPACE
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm test
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Astra-Workstation-Windows-x64
+          path: dist/Astra-Workstation-Setup-*.exe
+          if-no-files-found: error
+          retention-days: 14
