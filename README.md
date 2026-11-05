@@ -5,7 +5,7 @@ A personal Windows agent workstation built around the official OpenHands Agent C
 ## Features
 
 - Official Agent Canvas 1.35.0 running locally on Windows — no Docker, WSL or separately installed Node.js required.
-- Bundled Node.js 24.22.1 and uv 0.13.7, verified by SHA-256 during the Windows build.
+- Bundled Node.js 24.22.2 and uv 0.13.7, verified by SHA-256 during the Windows build.
 - Visible Microsoft Edge controlled through Playwright MCP with a persistent Astra-only browser profile.
 - Browser navigation, page inspection, clicking, form filling, screenshots and downloads.
 - Browser downloads saved under Documents/Astra Workstation/downloads.

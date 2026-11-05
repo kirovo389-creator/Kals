@@ -76,7 +76,12 @@ async function copyMissing(source, destination) {
     const src = path.join(source, entry.name);
     const dst = path.join(destination, entry.name);
     if (fsSync.existsSync(dst)) {
-      if (entry.isDirectory()) await copyMissing(src, dst);
+      if (entry.isDirectory()) {
+        const destinationStat = fsSync.lstatSync(dst);
+        if (destinationStat.isDirectory() && !destinationStat.isSymbolicLink()) {
+          await copyMissing(src, dst);
+        }
+      }
       continue;
     }
     if (entry.isDirectory()) {
@@ -344,7 +349,7 @@ async function verifyBundledRuntime(runtimeRoot) {
     run(uvExe, ['--version']),
     run(uvxExe, ['--version']),
   ]);
-  if (node.stdout.trim() !== 'v24.22.1') throw new Error('Неверная версия встроенного Node.js: ' + node.stdout.trim());
+  if (node.stdout.trim() !== 'v24.22.2') throw new Error('Неверная версия встроенного Node.js: ' + node.stdout.trim());
   if (!uv.stdout.includes('0.13.7') || !uvx.stdout.includes('0.13.7')) throw new Error('Версия встроенного uv не совпадает с ожидаемой 0.13.7.');
   return { nodeExe, uvExe, uvxExe };
 }

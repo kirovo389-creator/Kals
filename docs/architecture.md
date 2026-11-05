@@ -8,7 +8,7 @@ Astra is a Windows desktop shell around the official OpenHands Agent Canvas loca
 
 - **Electron shell**: startup, user-data migration, folder picker, process launch, diagnostics and local service lifecycle.
 - **OpenHands Agent Canvas 1.35.0**: local UI, conversations, model profiles, agent server and automation backend.
-- **Bundled Node.js 24.22.1**: provides node/npm/npx for MCP servers and local tools.
+- **Bundled Node.js 24.22.2**: provides node/npm/npx for MCP servers and local tools.
 - **Bundled uv 0.13.7**: resolves pinned OpenHands Python packages and a compatible Python runtime.
 - **Playwright MCP**: Microsoft Playwright MCP 0.0.84, running on Windows with visible Edge and a persistent Astra-only profile.
 - **Authenticated browser gateway**: a random bearer token protects the browser MCP HTTP endpoint. The upstream Playwright server and gateway bind only to Windows loopback.

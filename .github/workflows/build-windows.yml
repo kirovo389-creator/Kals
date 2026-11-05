@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.22.1
+          node-version: 24.22.2
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Run test suite
@@ -32,7 +32,7 @@ jobs:
           Write-Host "Node: $node"
           Write-Host "uv: $uv"
           Write-Host "uvx: $uvx"
-          if ($node -ne "v24.22.1") { throw "Unexpected Node version: $node" }
+          if ($node -ne "v24.22.2") { throw "Unexpected Node version: $node" }
           if ($uv -notmatch "0\.13\.7" -or $uvx -notmatch "0\.13\.7") { throw "Unexpected uv version" }
           foreach ($file in @("resources/node/npm.cmd", "resources/node/npx.cmd", "resources/node/node_modules/npm/bin/npm-cli.js")) {
             if (-not (Test-Path $file)) { throw "Missing runtime file: $file" }

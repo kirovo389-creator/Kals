@@ -10,10 +10,10 @@ import { Readable } from 'node:stream';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RESOURCES = join(ROOT, 'resources');
-const NODE_VERSION = '24.22.1';
+const NODE_VERSION = '24.22.2';
 const UV_VERSION = '0.13.7';
 const NODE_ARCHIVE = 'node-v' + NODE_VERSION + '-win-x64.zip';
-const NODE_SHA256 = 'd2046d28c2c3dcd211ac5145c0bf30e2047ef9dfb306693c8c6e2eccd8b95fa5';
+const NODE_SHA256 = 'ca1bff5d8ead13c9f2ea404a176db46bd430704d5b5113734049fa365e7799e2';
 const UV_ARCHIVE = 'uv-x86_64-pc-windows-msvc.zip';
 const UV_SHA256 = '0cdc5b38fe5a8168ed6a25814f5ba43c21d313dd3187314fccb37b7cec46e021';
 

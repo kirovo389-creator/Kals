@@ -17,7 +17,7 @@ https://github.com/astral-sh/uv/blob/main/LICENSE-APACHE
 
 ## Node.js
 
-Astra bundles the official Node.js Windows x64 distribution, version 24.22.1. Node.js is distributed under the MIT License:
+Astra bundles the official Node.js Windows x64 distribution, version 24.22.2. Node.js is distributed under the MIT License:
 
 https://github.com/nodejs/node/blob/main/LICENSE
 
