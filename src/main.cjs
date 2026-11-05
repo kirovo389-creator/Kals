@@ -119,6 +119,7 @@ async function ensureBrowserMcp(stateDir) {
   }
   config.mcpServers = config.mcpServers || {};
   config.mcpServers.astra_browser = {
+    transport: 'http',
     url: `http://host.docker.internal:${BROWSER_MCP_PORT}/mcp`,
     headers: { Authorization: `Bearer ${token}` },
   };
