@@ -2,18 +2,27 @@
 
 ## OpenHands Agent Canvas
 
-Astra Workstation runs the official ghcr.io/openhands/agent-canvas:1.35.0 container image. OpenHands Agent Canvas is licensed under the MIT License. The upstream license and copyright notice are available at:
+Astra bundles the official npm package @openhands/agent-canvas, version 1.35.0. OpenHands Agent Canvas is licensed under the MIT License:
 
 https://github.com/OpenHands/OpenHands/blob/main/LICENSE
 
 Copyright © 2025 OpenHands contributors.
 
-The OpenHands container is pulled from its official registry at runtime; Astra does not redistribute a modified copy of the image.
+## uv
+
+Astra bundles uv and uvx, version 0.13.7, from Astral. uv is licensed under the MIT License or Apache License 2.0:
+
+https://github.com/astral-sh/uv/blob/main/LICENSE-MIT
+https://github.com/astral-sh/uv/blob/main/LICENSE-APACHE
+
+## Node.js
+
+Astra bundles the official Node.js Windows x64 distribution, version 24.22.1. Node.js is distributed under the MIT License:
+
+https://github.com/nodejs/node/blob/main/LICENSE
 
 ## Microsoft Playwright MCP
 
-Astra uses the @playwright/mcp package, version 0.0.84, for visible browser automation. It is published by Microsoft and licensed under the Apache License 2.0:
+Astra uses @playwright/mcp version 0.0.84 for visible browser automation. It is published by Microsoft and licensed under the Apache License 2.0:
 
 https://github.com/microsoft/playwright-mcp/blob/main/LICENSE
-
-The package is installed as a dependency and included in the Windows application bundle.
