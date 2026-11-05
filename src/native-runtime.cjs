@@ -4,6 +4,8 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 
 const DEFAULT_HOST = '127.0.0.1';
+const AGENT_SERVER_PORT = 18100;
+const AUTOMATION_PORT = 18101;
 
 function getOpenHandsPaths(homeDir) {
   if (typeof homeDir !== 'string' || !homeDir.trim()) throw new TypeError('homeDir is required');
@@ -43,6 +45,8 @@ function buildNativeRuntimeEnv({ baseEnv = process.env, homeDir, stateDir, runti
     USERPROFILE: homeDir,
     OH_BIND_HOST: DEFAULT_HOST,
     OH_CANVAS_SAFE_STATE_DIR: stateDir,
+    OH_CANVAS_SAFE_BACKEND_PORT: String(AGENT_SERVER_PORT),
+    OH_CANVAS_SAFE_AUTOMATION_PORT: String(AUTOMATION_PORT),
     UV_CACHE_DIR: path.join(path.dirname(stateDir), 'uv-cache'),
     UV_TOOL_DIR: path.join(path.dirname(stateDir), 'uv-tools'),
     PATH: pathEntries.join(path.delimiter),
@@ -70,6 +74,8 @@ function rootAlias(root) {
 
 module.exports = {
   DEFAULT_HOST,
+  AGENT_SERVER_PORT,
+  AUTOMATION_PORT,
   getOpenHandsPaths,
   getAgentCanvasCliPath,
   getRuntimeRoot,
