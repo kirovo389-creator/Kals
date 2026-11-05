@@ -40,7 +40,7 @@ async function waitForPort(port, host = '127.0.0.1', timeoutMs = 90000) {
     if (await isPortOpen(port, host)) return;
     await new Promise(resolve => setTimeout(resolve, 500));
   }
-  throw new Error('Browser service did not open port ' + port + ' in time. Check the browser MCP log in Astra\\'s app-data folder.');
+  throw new Error('Browser service did not open port ' + port + ' in time. Check the browser MCP log in Astra app-data folder.');
 }
 
 function getRuntimeScriptPath(relativePath) {
