@@ -4,6 +4,8 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const {
+  AGENT_SERVER_PORT,
+  AUTOMATION_PORT,
   getOpenHandsPaths,
   getAgentCanvasCliPath,
   getRuntimeRoot,
@@ -46,6 +48,10 @@ test('native runtime environment places bundled tools first and preserves inheri
   assert.equal(result.USERPROFILE, '/home/test');
   assert.equal(result.OH_BIND_HOST, '127.0.0.1');
   assert.equal(result.OH_CANVAS_SAFE_STATE_DIR, '/home/test/.openhands/agent-canvas');
+  assert.equal(AGENT_SERVER_PORT, 18100);
+  assert.equal(AUTOMATION_PORT, 18101);
+  assert.equal(result.OH_CANVAS_SAFE_BACKEND_PORT, '18100');
+  assert.equal(result.OH_CANVAS_SAFE_AUTOMATION_PORT, '18101');
   assert.equal(result.KEEP_ME, 'yes');
   assert.ok(!result.PATH.includes('host.docker.internal'));
 });
@@ -60,4 +66,10 @@ test('workspace aliases are stable and filesystem-safe', () => {
   const second = rootAlias('D:/Code/My Game');
   assert.equal(first, second);
   assert.match(first, /^my-game-[a-f0-9]{8}$/);
+});
+
+test('native services avoid the legacy 0.2.0 Docker ingress port', () => {
+  assert.notEqual(AGENT_SERVER_PORT, 18000);
+  assert.notEqual(AUTOMATION_PORT, 18000);
+  assert.notEqual(AGENT_SERVER_PORT, AUTOMATION_PORT);
 });
