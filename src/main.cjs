@@ -44,7 +44,7 @@ async function waitForPort(port, host = '127.0.0.1', timeoutMs = 90000) {
 }
 
 function getRuntimeScriptPath(relativePath) {
-  return path.join(__dirname, relativePath);
+  return path.join(path.dirname(__dirname), relativePath);
 }
 
 function spawnRuntimeNode(nodeExe, scriptPath, args, env, logPath, options = {}) {
