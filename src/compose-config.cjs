@@ -57,7 +57,7 @@ function createComposeConfig({ stateDir, projectsDir, workspaceRoots = [], image
     ...mounts.map(mount => `      - ${yamlQuote(mount)}`),
     '    stop_grace_period: 30s',
     '',
-  ].join('\\n');
+  ].join('\n');
 }
 
 module.exports = { createComposeConfig, windowsDockerPath, rootAlias };
