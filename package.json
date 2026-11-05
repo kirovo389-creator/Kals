@@ -1,20 +1,22 @@
 {
   "name": "astra-workstation",
-  "version": "0.2.0",
-  "description": "Personal Windows agent workstation with a persistent browser and configurable workspace roots",
+  "version": "0.3.0",
+  "description": "Personal Windows agent workstation with a native Agent Canvas runtime and visible browser automation",
   "private": true,
   "license": "MIT",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",
     "test": "node --test tests/*.test.cjs",
-    "build": "electron-builder --win nsis"
+    "download:runtimes": "node scripts/download-runtimes.mjs",
+    "build": "node scripts/download-runtimes.mjs && electron-builder --win nsis"
   },
   "dependencies": {
+    "@openhands/agent-canvas": "1.35.0",
     "@playwright/mcp": "0.0.84"
   },
   "devDependencies": {
-    "electron": "45.2.2",
+    "electron": "45.2.3",
     "electron-builder": "26.18.0"
   },
   "build": {
@@ -31,21 +33,16 @@
     ],
     "files": [
       "src/**/*",
+      "scripts/download-runtimes.mjs",
       "package.json"
     ],
     "extraResources": [
-      {
-        "from": "assets/starter",
-        "to": "starter"
-      }
+      { "from": "assets/starter", "to": "starter" },
+      { "from": "resources/bin", "to": "bin", "filter": ["**/*"] },
+      { "from": "resources/node", "to": "node", "filter": ["**/*"] }
     ],
     "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": ["x64"]
-        }
-      ]
+      "target": [{ "target": "nsis", "arch": ["x64"] }]
     },
     "nsis": {
       "oneClick": false,
