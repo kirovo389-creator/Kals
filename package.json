@@ -16,7 +16,7 @@
     "@playwright/mcp": "0.0.84"
   },
   "devDependencies": {
-    "electron": "45.2.3",
+    "electron": "45.2.2",
     "electron-builder": "26.18.0"
   },
   "build": {
@@ -25,24 +25,40 @@
     "directories": {
       "output": "dist"
     },
-    "asarUnpack": [
-      "src/browser-proxy.cjs",
-      "node_modules/@playwright/mcp/**",
-      "node_modules/playwright/**",
-      "node_modules/playwright-core/**"
-    ],
     "files": [
       "src/**/*",
       "scripts/download-runtimes.mjs",
       "package.json"
     ],
     "extraResources": [
-      { "from": "assets/starter", "to": "starter" },
-      { "from": "resources/bin", "to": "bin", "filter": ["**/*"] },
-      { "from": "resources/node", "to": "node", "filter": ["**/*"] }
+      {
+        "from": "assets/starter",
+        "to": "starter"
+      },
+      {
+        "from": "resources/bin",
+        "to": "bin",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "resources/node",
+        "to": "node",
+        "filter": [
+          "**/*"
+        ]
+      }
     ],
     "win": {
-      "target": [{ "target": "nsis", "arch": ["x64"] }]
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -52,6 +68,7 @@
       "createStartMenuShortcut": true,
       "shortcutName": "Astra Workstation",
       "artifactName": "Astra-Workstation-Setup-${version}.${ext}"
-    }
+    },
+    "asar": false
   }
 }
