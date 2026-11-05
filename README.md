@@ -20,7 +20,7 @@ A personal Windows agent workstation built around the official OpenHands Agent C
 2. Start Astra and select **Запустить Astra**.
 3. The first launch starts Agent Canvas and downloads its Python backend packages through the bundled uv runtime. An internet connection is required.
 4. Configure an OpenAI-compatible provider in Agent Canvas: exact model ID, Base URL and API key.
-5. Open the AstraGameDevStarter project in Agent Canvas to use the included game-development Skills.
+5. Open the AstraGameDevStarter project in Agent Canvas to use the included game-development Skills. When upgrading from 0.2.0, the updated native template is placed in AstraGameDevStarter-0.3.0 so the old starter folder is left untouched.
 
 The browser opens in a separate, visible Microsoft Edge window. It uses an Astra-specific profile and remembers its own sign-ins between sessions. Sign in directly in that window; do not paste passwords or one-time codes into chat. You can take control of the browser at any time.
 
@@ -34,7 +34,7 @@ Do not connect folders containing passwords, API keys, SSH keys, browser profile
 
 ## Upgrade from 0.2.0
 
-The installer retains the existing application ID and product identity. On first launch, Astra copies the old state directory from the 0.2.0 app-data location into %USERPROFILE%\.openhands without deleting the old copy. The browser profile and Documents\Astra Workstation\projects directory remain in place. The old 0.2.0 data folder is retained as a recovery copy.
+The installer retains the existing application ID and product identity. On first launch, Astra copies the old state directory from the 0.2.0 app-data location into %USERPROFILE%\.openhands without deleting the old copy. The browser profile and Documents\Astra Workstation\projects directory remain in place. The old 0.2.0 data folder is retained as a recovery copy. If the previous AstraGameDevStarter project exists, it is preserved and the refreshed 0.3.0 starter is copied beside it as AstraGameDevStarter-0.3.0.
 
 The new runtime uses %USERPROFILE%\.openhands\agent-canvas for Agent Canvas state and %USERPROFILE%\.openhands\mcp.json for MCP configuration. Migration only fills files that do not already exist in the new location; existing destination files are never overwritten.
 

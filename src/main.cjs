@@ -302,7 +302,10 @@ async function run(command, args, options = {}) {
 async function prepareWorkspace() {
   const homeDir = app.getPath('home');
   const projectsDir = path.join(app.getPath('documents'), 'Astra Workstation', 'projects');
-  const starterDir = path.join(projectsDir, 'AstraGameDevStarter');
+  const baseStarterDir = path.join(projectsDir, 'AstraGameDevStarter');
+  const starterDir = fsSync.existsSync(baseStarterDir)
+    ? path.join(projectsDir, 'AstraGameDevStarter-0.3.0')
+    : baseStarterDir;
   const userData = app.getPath('userData');
   const legacyStateDir = path.join(userData, 'openhands');
   const openHandsPaths = getOpenHandsPaths(homeDir);

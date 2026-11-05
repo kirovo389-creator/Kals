@@ -37,6 +37,11 @@ jobs:
           foreach ($file in @("resources/node/npm.cmd", "resources/node/npx.cmd", "resources/node/node_modules/npm/bin/npm-cli.js")) {
             if (-not (Test-Path $file)) { throw "Missing runtime file: $file" }
           }
+      - name: Smoke-test Agent Canvas CLI with bundled Node.js
+        shell: pwsh
+        run: |
+          & resources/node/node.exe node_modules/@openhands/agent-canvas/bin/agent-canvas.mjs --info
+          if ($LASTEXITCODE -ne 0) { throw "Agent Canvas CLI smoke test failed." }
       - name: Build Windows installer
         run: npm run build -- --publish never
       - name: Verify installer artifact
