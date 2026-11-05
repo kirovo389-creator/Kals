@@ -11,16 +11,9 @@ concurrency:
 jobs:
   build:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-      - name: Restore source bundle
-        shell: pwsh
-        run: |
-          $encoded = Get-Content -Raw .\astra-source.tar.gz.b64
-          $archive = Join-Path $env:RUNNER_TEMP 'astra-source.tar.gz'
-          [IO.File]::WriteAllBytes($archive, [Convert]::FromBase64String($encoded))
-          tar -xzf $archive -C $env:GITHUB_WORKSPACE
       - uses: actions/setup-node@v4
         with:
           node-version: 22
