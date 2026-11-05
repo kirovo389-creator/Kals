@@ -14,27 +14,36 @@
       <div><div class="brand-name">Astra Workstation</div><div class="brand-sub">LOCAL AI DEVELOPMENT ENVIRONMENT</div></div>
     </div>
     <section class="hero">
-      <div class="eyebrow">PERSONAL AGENT WORKSPACE</div>
+      <div class="eyebrow">PERSONAL AGENT WORKSPACE · WINDOWS NATIVE</div>
       <h1>Твоя рабочая среда<br><span>для разработки и 3D</span></h1>
-      <p class="lead">Чат, терминал, файлы и автономная Docker-среда на твоём компьютере. Для игровых проектов подготовлены навыки Godot, Blender, рендера и тестирования.</p>
+      <p class="lead">Чат, терминал, файлы, настоящий Edge-браузер и инструменты разработки игр. Agent Canvas работает напрямую в Windows — Docker и WSL не нужны.</p>
       <div class="status-panel">
         <div class="status-line"><span class="pulse"></span><span id="status">Готов к запуску</span></div>
-        <div class="status-detail" id="detail">Первый запуск загрузит Docker-образ Agent Canvas. Это может занять время и потребовать несколько гигабайт свободного места.</div>
+        <div class="status-detail" id="detail">Astra использует встроенные Node.js и uv. Первый запуск загрузит Python-компоненты Agent Canvas; потребуется подключение к интернету и место на диске.</div>
       </div>
       <div class="actions">
-        <button id="start" class="primary">Запустить песочницу <span>→</span></button>
+        <button id="start" class="primary">Запустить Astra <span>→</span></button>
         <button id="projects" class="secondary">Открыть проекты</button>
         <button id="add-folder" class="secondary">Добавить папку</button>
+        <button id="logs" class="secondary">Открыть логи</button>
       </div>
       <div class="error" id="error" hidden></div>
-      <div class="workspace-roots"><b>Доступные папки</b><div id="roots-list">Загружаю список…</div><small>Агент сможет читать и изменять файлы внутри добавленных папок. Системные каталоги и хранилища учётных данных не подключаются.</small></div>
+      <div class="workspace-roots">
+        <b>Рабочие папки</b>
+        <div id="roots-list">Загружаю список…</div>
+        <small>Дополнительные папки отображаются в projects/roots как ссылки. В нативном режиме это не граница доступа: агент работает с правами твоей Windows-учётной записи.</small>
+      </div>
+      <div class="security-note">
+        <b>Режим без изоляции контейнера</b>
+        <span>Агент может читать и изменять файлы, доступные твоей Windows-учётной записи. Не передавай ему пароли, API-ключи и приватные данные; проверяй команды и сохраняй резервные копии.</span>
+      </div>
     </section>
     <section class="requirements">
-      <div class="req"><span class="req-dot"></span><div><b>Docker Desktop</b><small>Нужен для изоляции</small></div></div>
+      <div class="req"><span class="req-dot"></span><div><b>Без Docker и WSL</b><small>Нативный backend Windows</small></div></div>
       <div class="req"><span class="req-dot"></span><div><b>Подключение к API</b><small>Base URL · API Key · Model ID</small></div></div>
-      <div class="req"><span class="req-dot"></span><div><b>Игровые навыки</b><small>Установлены в стартовый проект</small></div></div>
+      <div class="req"><span class="req-dot"></span><div><b>Игровые навыки</b><small>Godot · Blender · QA · рендер</small></div></div>
     </section>
-    <footer><span>Astra Workstation 0.2.0</span><span>OpenHands Agent Canvas · MIT</span></footer>
+    <footer><span>Astra Workstation 0.3.0</span><span>OpenHands Agent Canvas · MIT</span></footer>
   </main>
   <script src="./start.js"></script>
 </body>
