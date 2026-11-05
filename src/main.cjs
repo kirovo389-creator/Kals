@@ -20,8 +20,6 @@ const BASE_URL = `http://127.0.0.1:${HOST_PORT}`;
 const DOCKER_DESKTOP_EXE = 'C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe';
 let mainWindow;
 let startPromise;
-let browserMcpStarted = false;
-let browserProxyStarted = false;
 
 
 function isPortOpen(port, host = '127.0.0.1') {
@@ -122,8 +120,6 @@ async function ensureBrowserMcp(stateDir) {
     headers: { Authorization: `Bearer ${token}` },
   };
   await fs.writeFile(mcpConfigPath, JSON.stringify(config, null, 2), 'utf8');
-  browserMcpStarted = true;
-  browserProxyStarted = true;
 }
 
 async function loadWorkspaceRoots(projectsDir) {
@@ -354,7 +350,7 @@ ipcMain.handle('astra:open-project-folder', async () => {
 ipcMain.handle('astra:add-workspace-root', async () => {
   const result = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory', 'createDirectory'] });
   if (result.canceled || !result.filePaths?.[0]) return { cancelled: true };
-  const selected = path.resolve(result.filePaths[0]);
+  const selected = await fs.realpath(result.filePaths[0]);
   if (isProtectedWorkspaceRoot(selected)) {
     throw new Error('Эту папку нельзя подключить целиком: она содержит системные файлы или хранилища учётных данных. Выбери конкретную рабочую папку, например Documents, Desktop, Downloads или папку с проектами.');
   }
